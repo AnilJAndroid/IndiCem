@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/slideViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/slideIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        app:ci_drawable_unselected="@drawable/circleindicator_color_unselected"
+        app:ci_drawable="@drawable/circleindicator_color_selected" />
+
+</RelativeLayout>
