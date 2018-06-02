@@ -41,6 +41,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         ProductModel model = list.get(position);
         holder.prod_title.setText(model.getProd_name());
         holder.iv_prod.setImageDrawable(ContextCompat.getDrawable(context,model.getProd_image()));
+        holder.txt_price.setText("499.00 " + context.getString(R.string.Rs));
     }
     public void swipable(int pos){
         notifyItemChanged(pos);
@@ -52,11 +53,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
     class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView iv_prod;
-        private TextView prod_title;
+        private TextView prod_title,txt_price;
         public ViewHolder(View itemView) {
             super(itemView);
             iv_prod = itemView.findViewById(R.id.iv_prod);
             prod_title = itemView.findViewById(R.id.prod_title);
+            txt_price = itemView.findViewById(R.id.txt_price);
         }
     }
 

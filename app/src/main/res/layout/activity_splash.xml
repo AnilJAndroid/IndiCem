@@ -5,12 +5,14 @@
     android:layout_height="match_parent"
     tools:context="com.seawind.indicham.SplashActivity"
     android:layout_gravity="center"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/background">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo1"
-        android:scaleType="centerInside"/>
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo_shadow"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"/>
 
 </LinearLayout>
