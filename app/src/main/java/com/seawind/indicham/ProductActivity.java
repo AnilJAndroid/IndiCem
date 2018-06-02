@@ -6,12 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.seawind.indicham.Adapter.ProductAdapter;
 import com.seawind.indicham.Util.RecyclerTouchListener;
@@ -31,11 +29,10 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prodict);
 
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("PRODUCTS");
+        getSupportActionBar().setTitle("Products");
         
         recyclewview = findViewById(R.id.recyclewview);
         recyclewview.setHasFixedSize(true);

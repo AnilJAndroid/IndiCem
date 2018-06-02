@@ -35,7 +35,7 @@ public class CartAcitivty extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("CART");
+        getSupportActionBar().setTitle("Shopping cart");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btn_checkout = findViewById(R.id.btn_checkout);

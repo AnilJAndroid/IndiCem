@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_edittext"
-                android:hint="Name"
+                android:hint="username"
                 android:padding="10dp"
                 android:textColor="@android:color/darker_gray" />
 
@@ -65,14 +65,6 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_edittext"
                 android:hint="Contact No"
-                android:padding="10dp"
-                android:textColor="@android:color/darker_gray" />
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/rounded_edittext"
-                android:hint="Username"
                 android:padding="10dp"
                 android:textColor="@android:color/darker_gray" />
             <EditText
@@ -98,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Aleady registered? Login Now"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@color/colorPrimaryDark"
                 android:padding="10dp"/>
 
         </LinearLayout>

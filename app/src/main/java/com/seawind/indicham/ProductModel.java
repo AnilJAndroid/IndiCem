@@ -5,6 +5,7 @@ package com.seawind.indicham;
  */
 
 public class ProductModel {
+    private int qty=1;
     public int getProd_image() {
         return prod_image;
     }
@@ -23,4 +24,12 @@ public class ProductModel {
 
     private int prod_image;
     private String prod_name;
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
 }
