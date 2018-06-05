@@ -1,8 +1,6 @@
 package com.seawind.indicham.Adapter;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +12,8 @@ import android.widget.TextView;
 
 import com.seawind.indicham.ProductModel;
 import com.seawind.indicham.R;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by admin on 28-May-18.
@@ -42,20 +39,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         final ProductModel model = list.get(position);
         holder.prod_title.setText(model.getProd_name());
         holder.iv_prod.setImageDrawable(ContextCompat.getDrawable(context,model.getProd_image()));
-        holder.txt_price.setText("499.00 " + context.getString(R.string.Rs));
+        holder.txt_price.setText(model.getVal()+".00 " + context.getString(R.string.Rs));
         holder.txt_total_qty.setText(String.valueOf(model.getQty()));
         holder.btn_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 model.setQty(model.getQty()+1);
+                model.setVal(model.getVal()+model.getPrice());
                 notifyDataSetChanged();
             }
         });
         holder.btn_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                model.setQty(model.getQty()-1);
-                notifyDataSetChanged();
+                if(model.getQty()>1){
+                    model.setQty(model.getQty()-1);
+                    model.setVal(model.getVal()-model.getPrice());
+                    notifyDataSetChanged();
+                }
             }
         });
     }

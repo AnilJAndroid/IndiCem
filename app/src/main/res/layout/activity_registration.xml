@@ -43,6 +43,7 @@
             android:gravity="center">
 
             <EditText
+                android:id="@+id/edt_username"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -52,6 +53,7 @@
                 android:textColor="@android:color/darker_gray" />
 
             <EditText
+                android:id="@+id/edt_email"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -60,6 +62,7 @@
                 android:padding="10dp"
                 android:textColor="@android:color/darker_gray" />
             <EditText
+                android:id="@+id/edt_contact_no"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -68,16 +71,18 @@
                 android:padding="10dp"
                 android:textColor="@android:color/darker_gray" />
             <EditText
+                android:id="@+id/edt_password"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_edittext"
                 android:hint="Password"
                 android:padding="10dp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:inputType="textPassword"/>
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign Up"

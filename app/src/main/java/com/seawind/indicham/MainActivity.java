@@ -3,9 +3,7 @@ package com.seawind.indicham;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -73,12 +71,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.ic_logout:
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_cart:
+                startActivity(new Intent(getApplicationContext(),CartAcitivty.class));
+                break;
+            case R.id.nav_contactus:
+                startActivity(new Intent(getApplicationContext(),ContactUsActivity.class));
+                break;
+            case R.id.nav_aboutus:
+                startActivity(new Intent(getApplicationContext(),AboutUsActivity.class));
+                break;
+            case R.id.nav_logout:
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+        }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

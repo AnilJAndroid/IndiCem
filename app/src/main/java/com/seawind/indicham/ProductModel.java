@@ -6,6 +6,9 @@ package com.seawind.indicham;
 
 public class ProductModel {
     private int qty=1;
+    private int price=299;
+    private int val = 299;
+
     public int getProd_image() {
         return prod_image;
     }
@@ -31,5 +34,17 @@ public class ProductModel {
 
     public void setQty(int qty) {
         this.qty = qty;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getVal() {
+        return val;
+    }
+
+    public void setVal(int val) {
+        this.val = val;
     }
 }

@@ -23,7 +23,7 @@
         android:title="My Wish List"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/Logout"
+        android:id="@+id/ic_logout"
         android:title="Logout"
         app:showAsAction="never" />
 </menu>
