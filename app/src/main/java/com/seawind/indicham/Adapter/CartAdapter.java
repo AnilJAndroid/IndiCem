@@ -38,7 +38,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ProductModel model = list.get(position);
         holder.prod_title.setText(model.getProd_name());
-        holder.iv_prod.setImageDrawable(ContextCompat.getDrawable(context,model.getProd_image()));
+//        holder.iv_prod.setImageDrawable(ContextCompat.getDrawable(context,model.getProd_image()));
         holder.txt_price.setText(model.getVal()+".00 " + context.getString(R.string.Rs));
         holder.txt_total_qty.setText(String.valueOf(model.getQty()));
         holder.btn_plus.setOnClickListener(new View.OnClickListener() {

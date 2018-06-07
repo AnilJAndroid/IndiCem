@@ -5,15 +5,17 @@ package com.seawind.indicham;
  */
 
 public class ProductModel {
+
     private int qty=1;
     private int price=299;
     private int val = 299;
+    private String P_desc;
 
-    public int getProd_image() {
+    public String getProd_image() {
         return prod_image;
     }
 
-    public void setProd_image(int prod_image) {
+    public void setProd_image(String prod_image) {
         this.prod_image = prod_image;
     }
 
@@ -25,7 +27,7 @@ public class ProductModel {
         this.prod_name = prod_name;
     }
 
-    private int prod_image;
+    private String prod_image;
     private String prod_name;
 
     public int getQty() {
@@ -44,7 +46,19 @@ public class ProductModel {
         return val;
     }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public void setVal(int val) {
         this.val = val;
+    }
+
+    public String getP_desc() {
+        return P_desc;
+    }
+
+    public void setP_desc(String p_desc) {
+        P_desc = p_desc;
     }
 }

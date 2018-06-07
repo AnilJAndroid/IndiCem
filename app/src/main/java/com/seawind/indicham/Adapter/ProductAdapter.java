@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.seawind.indicham.ProductModel;
 import com.seawind.indicham.R;
 import com.seawind.indicham.Util.OnSwipeListener;
@@ -43,7 +44,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ProductModel model = list.get(position);
-        holder.iv_prod.setImageDrawable(ContextCompat.getDrawable(context,model.getProd_image()));
+        Glide.with(context).load(model.getProd_image()).into(holder.iv_prod);
         holder.txt_prod_title.setText(model.getProd_name());
     }
     @Override

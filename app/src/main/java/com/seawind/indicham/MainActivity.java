@@ -16,6 +16,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.seawind.indicham.Fragment.HomeFragment;
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        navigationView.getHeaderView(0).setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+        });
         DefaultHomeMethod();
     }
 
@@ -76,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                break;
+            case R.id.ic_changepassword:
+                startActivity(new Intent(getApplicationContext(),ChangePasswordActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

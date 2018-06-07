@@ -53,7 +53,7 @@ public class CartAcitivty extends AppCompatActivity {
         for (int i = 0; i < image.length; i++) {
             ProductModel model = new ProductModel();
             model.setProd_name(product_name[i]);
-            model.setProd_image(image[i]);
+//            model.setProd_image(image[i]);
             models.add(model);
         }
 

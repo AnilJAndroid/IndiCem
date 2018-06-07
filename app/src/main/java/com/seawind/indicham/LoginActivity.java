@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.btn_login) Button btn_login;
     @BindViews({R.id.edt_username,R.id.edt_password}) List<EditText> nameViews;
     @BindView(R.id.txt_signup) TextView txt_signup;
+    @BindView(R.id.txt_forgot_password) TextView txt_forgot_password;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
     }
-
-
     @OnClick(R.id.btn_login)
     public void submit() {
         String username = nameViews.get(0).getText().toString();
@@ -50,6 +49,12 @@ public class LoginActivity extends AppCompatActivity {
     public void signup(){
         startActivity(new Intent(getApplicationContext(),RegistrationActivity.class));
     }
+
+    @OnClick(R.id.txt_forgot_password)
+    public void forgot_password(){
+        startActivity(new Intent(getApplicationContext(),ForgotPasswordActivity.class));
+    }
+
     void doLogin(String username,String password){
         ProgressDialog pd = ProgressDialog.show(LoginActivity.this,"","Loading...!");
         pd.show();
@@ -64,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(strRes);
                         if(jsonObject.getString("success").equals("true")){
                             finish();
+                            String userid = jsonObject.getString("userid");
+                            Session.getInstance().setUser_id(userid);
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else {
                             Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
@@ -75,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
                 pd.dismiss();
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
