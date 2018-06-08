@@ -36,7 +36,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="326dp"
+        android:layout_height="372dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -98,6 +98,18 @@
             android:layout_marginTop="10dp"
             android:text="Don't have an login? Sign up Now"
             android:textColor="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/txt_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingRight="20dp"
+            android:text="Skip>>"
+            android:textColor="@color/colorPrimaryDark" />
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

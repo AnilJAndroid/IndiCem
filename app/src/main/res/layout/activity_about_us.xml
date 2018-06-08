@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="We have earned a reputed name in the industry by providing best quality insecticides named Miraj-71. These herbicides are widely used to protect crops from unwanted insects, pests and diseases which can damage them. Best quality and effective results are perceived from these products. Different quantity of these products can be availed by the clients as per the requirement."
         android:padding="10dp"
         android:maxLines = "20"
         android:scrollbars="vertical"

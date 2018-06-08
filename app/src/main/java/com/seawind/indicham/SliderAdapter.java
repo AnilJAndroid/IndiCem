@@ -41,7 +41,7 @@ public class SliderAdapter extends PagerAdapter {
         imageLayoutView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, ProductActivity.class));
+//                context.startActivity(new Intent(context, ProductActivity.class));
             }
         });
         ImageView imageView = (ImageView) imageLayoutView.findViewById(R.id.sliderImageView);

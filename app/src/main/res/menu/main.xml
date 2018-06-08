@@ -26,8 +26,8 @@
         android:id="@+id/ic_changepassword"
         android:title="Change Password"
         app:showAsAction="never" />
-    <item
+   <!-- <item
         android:id="@+id/ic_logout"
         android:title="Logout"
-        app:showAsAction="never" />
+        app:showAsAction="never" />-->
 </menu>

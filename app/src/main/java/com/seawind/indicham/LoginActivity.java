@@ -2,13 +2,17 @@ package com.seawind.indicham;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.seawind.indicham.Util.Constant;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,12 +36,19 @@ public class LoginActivity extends AppCompatActivity {
     @BindViews({R.id.edt_username,R.id.edt_password}) List<EditText> nameViews;
     @BindView(R.id.txt_signup) TextView txt_signup;
     @BindView(R.id.txt_forgot_password) TextView txt_forgot_password;
+    @BindView(R.id.txt_skip) TextView txt_skip;
+
+    private SharedPreferences sPref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         ButterKnife.bind(this);
+
+        sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
     }
     @OnClick(R.id.btn_login)
     public void submit() {
@@ -49,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
     public void signup(){
         startActivity(new Intent(getApplicationContext(),RegistrationActivity.class));
     }
-
     @OnClick(R.id.txt_forgot_password)
     public void forgot_password(){
         startActivity(new Intent(getApplicationContext(),ForgotPasswordActivity.class));
@@ -68,9 +78,10 @@ public class LoginActivity extends AppCompatActivity {
                         String strRes = response.body().string();
                         JSONObject jsonObject = new JSONObject(strRes);
                         if(jsonObject.getString("success").equals("true")){
-                            finish();
                             String userid = jsonObject.getString("userid");
-                            Session.getInstance().setUser_id(userid);
+                            sPref.edit().putBoolean(Constant.KEY_ISLOGIN,true).
+                                    putString(Constant.KEY_USER_ID,userid).apply();
+                            finish();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else {
                             Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
@@ -87,5 +98,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    @OnClick(R.id.txt_skip)
+    public void skip(){
+        finish();
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 }

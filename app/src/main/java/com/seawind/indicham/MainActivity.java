@@ -3,7 +3,9 @@ package com.seawind.indicham;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -17,16 +19,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.seawind.indicham.Fragment.HomeFragment;
+import com.seawind.indicham.Util.Constant;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
+    SharedPreferences sPref;
+    View header_view;
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -36,10 +45,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getHeaderView(0).setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+
+        header_view = navigationView.getHeaderView(0);
+
+        header_view.setOnClickListener(v -> {
+            drawer.closeDrawer(GravityCompat.START);
+            if(sPref.getBoolean(Constant.KEY_ISLOGIN,false)){
+                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+            }else {
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+            }
         });
         DefaultHomeMethod();
     }
@@ -75,11 +92,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.ic_logout:
-                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                break;
             case R.id.ic_changepassword:
                 startActivity(new Intent(getApplicationContext(),ChangePasswordActivity.class));
                 break;
@@ -101,9 +113,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(getApplicationContext(),AboutUsActivity.class));
                 break;
             case R.id.nav_logout:
-                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(sPref.getBoolean(Constant.KEY_ISLOGIN,false)){
+                    sPref.edit().clear().apply();
+                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else {
+                    drawer.closeDrawer(GravityCompat.START);
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                }
+
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -115,5 +134,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(sPref.getBoolean(Constant.KEY_ISLOGIN,false)){
+            TextView navUsername = header_view.findViewById(R.id.txt_username);
+            navUsername.setText("Mukesh pawar");
+            Menu menu = navigationView.getMenu();
+            MenuItem nav_login_Status = menu.findItem(R.id.nav_logout);
+            nav_login_Status.setTitle("Logout");
+
+        }
     }
 }

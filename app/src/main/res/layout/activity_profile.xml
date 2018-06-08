@@ -79,6 +79,7 @@
                 android:hint="Contact No"
                 android:padding="10dp"
                 android:textColor="@android:color/darker_gray" />
+
             <EditText
                 android:id="@+id/edt_address"
                 android:layout_width="300dp"
@@ -88,11 +89,12 @@
                 android:hint="Address"
                 android:padding="10dp"
                 android:textColor="@android:color/darker_gray"
-                android:inputType="textPassword"
                 android:lines="6"
                 android:minLines="4"
                 android:gravity="top|left"
-                android:maxLines="8"/>
+                android:maxLines="8"
+                android:scrollbars="vertical"/>
+
 
             <Button
                 android:id="@+id/btn_update"

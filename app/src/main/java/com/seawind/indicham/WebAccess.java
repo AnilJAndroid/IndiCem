@@ -37,6 +37,8 @@ public class WebAccess {
         Call<ResponseBody> Category_list(@Query("apiname") String key);
         @GET("api.php?")
         Call<ResponseBody> Product_list(@Query("apiname") String key,@Query("cat_id") String cat_id);
+        @GET("api.php?")
+        Call<ResponseBody> getUserDetails(@Query("apiname") String key,@Query("id") String id);
     }
 
 }

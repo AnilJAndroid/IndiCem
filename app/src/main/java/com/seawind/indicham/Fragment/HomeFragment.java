@@ -162,37 +162,29 @@ public class HomeFragment extends Fragment {
         private Context context;
         private LayoutInflater mInflater;
         private ArrayList<CategoryModel> list;
-
         public Category_Adpter(Context context, ArrayList<CategoryModel> models){
             this.context = context;
             this.mInflater = LayoutInflater.from(context);
             this.list = models;
         }
-
-
         public CategoryModel getItem(int pos){
             return this.list.get(pos);
         }
-
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itetview = mInflater.inflate(R.layout.category_listrow,parent,false);
             return new ViewHolder(itetview);
         }
-
         @Override
         public void onBindViewHolder(Category_Adpter.ViewHolder holder, int position) {
             CategoryModel model = getItem(position);
             Glide.with(context).load(model.getCategory_image()).into(holder.cat_img);
-//          holder.cat_img.setImageDrawable(ContextCompat.getDrawable(context,model.getCategory_image()));
             holder.txt_c_name.setText(model.getCategory_name());
         }
-
         @Override
         public int getItemCount() {
             return this.list.size();
         }
-
         class ViewHolder extends RecyclerView.ViewHolder{
             private ImageView cat_img;
             private TextView txt_c_name;
