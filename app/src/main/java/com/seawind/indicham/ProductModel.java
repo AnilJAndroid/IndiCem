@@ -1,10 +1,12 @@
 package com.seawind.indicham;
 
+import java.io.Serializable;
+
 /**
  * Created by admin on 28-May-18.
  */
 
-public class ProductModel {
+public class ProductModel implements Serializable{
 
     private int qty=1;
     private int price=299;

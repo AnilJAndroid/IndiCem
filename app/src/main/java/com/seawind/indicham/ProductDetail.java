@@ -14,13 +14,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class ProductDetail extends AppCompatActivity {
 
-    private TextView txt_price;
+    private TextView txt_price,pro_desc;
     private int price = 299;
     private int val=299;
     private int increase=1;
     private ViewPager viewpager;
+
+    private ProductModel model;
 
 
     @Override
@@ -32,19 +36,27 @@ public class ProductDetail extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        model = (ProductModel) getIntent().getSerializableExtra("p_model");
+        price = model.getPrice();
+        val = model.getPrice();
+
         txt_price = findViewById(R.id.txt_price);
         ImageView prod_image = findViewById(R.id.prod_image);
         final TextView txt_count = findViewById(R.id.txt_count);
+        pro_desc = findViewById(R.id.pro_desc);
+        pro_desc.setText(model.getP_desc());
 
         ImageButton btn_plus = findViewById(R.id.btn_plus);
         ImageButton btn_minus = findViewById(R.id.btn_minus);
         btn_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                increase = increase+1;
-                val = val+price;
-                txt_price.setText(val+".00 " +getString(R.string.Rs));
-                txt_count.setText(String.valueOf(increase));
+                if(increase<model.getQty()){
+                    increase = increase+1;
+                    val = val+price;
+                    txt_price.setText(val+".00 " +getString(R.string.Rs));
+                    txt_count.setText(String.valueOf(increase));
+                }
             }
         });
         btn_minus.setOnClickListener(new View.OnClickListener() {
@@ -63,9 +75,10 @@ public class ProductDetail extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        prod_image.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),i.getIntExtra("prod_image",R.drawable.image1)));
+        Glide.with(getApplicationContext()).load(model.getProd_image()).into(prod_image);
+//        prod_image.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),i.getIntExtra("prod_image",R.drawable.image1)));
 //        prod_title.setText(i.getStringExtra("prod_name"));
-        getSupportActionBar().setTitle(i.getStringExtra("prod_name"));
+        getSupportActionBar().setTitle(model.getProd_name());
 
     }
 

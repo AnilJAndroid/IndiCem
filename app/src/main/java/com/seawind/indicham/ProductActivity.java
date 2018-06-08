@@ -68,8 +68,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View child, int childPosition) {
                 Intent intent = new Intent(getApplicationContext(),ProductDetail.class);
                 ProductModel model = adapter.getItem(childPosition);
-                intent.putExtra("prod_image",model.getProd_image());
-                intent.putExtra("prod_name",model.getProd_name());
+                intent.putExtra("p_model",model);
                 startActivity(intent);
             }
         }){
