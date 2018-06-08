@@ -79,8 +79,10 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(strRes);
                         if(jsonObject.getString("success").equals("true")){
                             String userid = jsonObject.getString("userid");
+                            String user_email_id = jsonObject.getString("email");
                             sPref.edit().putBoolean(Constant.KEY_ISLOGIN,true).
-                                    putString(Constant.KEY_USER_ID,userid).apply();
+                                    putString(Constant.KEY_USER_ID,userid)
+                                    .putString(Constant.KEY_USER_EMAILID,user_email_id).apply();
                             finish();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else {

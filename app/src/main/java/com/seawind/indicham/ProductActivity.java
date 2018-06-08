@@ -30,11 +30,6 @@ import retrofit2.Response;
 public class ProductActivity extends AppCompatActivity {
     RecyclerView recyclewview;
     ProductAdapter adapter;
-    private int[] image = new int[]{R.drawable.image1,R.drawable.image2,R.drawable.image3,
-                                    R.drawable.image4,R.drawable.image5,R.drawable.image5};
-
-    private String[] product_name = new String[]{"Imidacloprid","Cypermethrin","Thiamethoxam",
-                                                "Malathion","Glyphosate","Thiamethoxam"};
 
     private String category_id="1";
 
@@ -59,8 +54,6 @@ public class ProductActivity extends AppCompatActivity {
         int numberOfColumns = 2;
         recyclewview.setHasFixedSize(true);
         recyclewview.setLayoutManager(new GridLayoutManager(this,numberOfColumns));
-        /*adapter = new ProductAdapter(getApplicationContext(),models);
-        recyclewview.setAdapter(adapter);*/
         recyclewview.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclewview, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onLongClick(View child, int childPosition) {}
@@ -114,11 +107,12 @@ public class ProductActivity extends AppCompatActivity {
                         for(int i=0;i<array.length();i++){
                             JSONObject jsonObject = array.getJSONObject(i);
                             ProductModel model = new ProductModel();
+                            model.setId(jsonObject.getString("product_id"));
                             model.setProd_name(jsonObject.getString("product_name"));
                             model.setPrice(Integer.parseInt(jsonObject.getString("print_price")));
                             model.setP_desc(jsonObject.getString("product_description"));
                             model.setProd_image(jsonObject.getString("product_image"));
-                            model.setQty(Integer.parseInt(jsonObject.getString("quantity")));
+                            model.setMaxQty(Integer.parseInt(jsonObject.getString("quantity")));
                             list.add(model);
                         }
                         adapter = new ProductAdapter(getApplicationContext(),list);

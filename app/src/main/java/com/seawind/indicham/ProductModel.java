@@ -1,17 +1,24 @@
 package com.seawind.indicham;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import io.realm.RealmObject;
 
 /**
  * Created by admin on 28-May-18.
  */
 
-public class ProductModel implements Serializable{
+public class ProductModel extends RealmObject implements Serializable {
 
+    private String id;
+    private int MaxQty;
     private int qty=1;
     private int price=299;
     private int val = 299;
     private String P_desc;
+    private Date timestamp;
+
 
     public String getProd_image() {
         return prod_image;
@@ -62,5 +69,21 @@ public class ProductModel implements Serializable{
 
     public void setP_desc(String p_desc) {
         P_desc = p_desc;
+    }
+
+    public int getMaxQty() {
+        return MaxQty;
+    }
+
+    public void setMaxQty(int maxQty) {
+        MaxQty = maxQty;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion project.compileSDKVersion
@@ -23,6 +24,9 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+}
+realm {
+    syncEnabled = true
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

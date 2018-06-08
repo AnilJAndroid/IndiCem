@@ -140,8 +140,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         if(sPref.getBoolean(Constant.KEY_ISLOGIN,false)){
+            String emailID = sPref.getString(Constant.KEY_USER_EMAILID,"");
             TextView navUsername = header_view.findViewById(R.id.txt_username);
-            navUsername.setText("Mukesh pawar");
+            navUsername.setText(emailID);
             Menu menu = navigationView.getMenu();
             MenuItem nav_login_Status = menu.findItem(R.id.nav_logout);
             nav_login_Status.setTitle("Logout");

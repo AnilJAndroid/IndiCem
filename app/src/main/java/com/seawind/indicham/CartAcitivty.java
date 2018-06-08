@@ -7,24 +7,26 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.seawind.Database.Product;
 import com.seawind.indicham.Adapter.CartAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class CartAcitivty extends AppCompatActivity {
     RecyclerView recyclewview;
-    private int[] image = new int[]{R.drawable.image1,R.drawable.image2,R.drawable.image3,
-            R.drawable.image4,R.drawable.image5,R.drawable.image5};
-
-    private String[] product_name = new String[]{"Imidacloprid","Cypermethrin","Thiamethoxam",
-            "Malathion","Glyphosate","Thiamethoxam"};
-
     private Button btn_checkout;
 
     @Override
@@ -38,26 +40,14 @@ public class CartAcitivty extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btn_checkout = findViewById(R.id.btn_checkout);
-        btn_checkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CheckoutActivity.class));
-            }
-        });
+        btn_checkout.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),CheckoutActivity.class)));
         recyclewview = findViewById(R.id.recyclewview);
         recyclewview.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         recyclewview.setLayoutManager(llm);
         recyclewview.addItemDecoration(new com.seawind.indicham.Util.DividerItemDecoration(getResources()));
-        ArrayList<ProductModel> models = new ArrayList<>();
-        for (int i = 0; i < image.length; i++) {
-            ProductModel model = new ProductModel();
-            model.setProd_name(product_name[i]);
-//            model.setProd_image(image[i]);
-            models.add(model);
-        }
 
-        final CartAdapter cartAdapter = new CartAdapter(getApplicationContext(), models);
+        final CartAdapter cartAdapter = new CartAdapter(getApplicationContext(), getProducts());
         recyclewview.setAdapter(cartAdapter);
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -66,9 +56,7 @@ public class CartAcitivty extends AppCompatActivity {
                 cartAdapter.swipable(viewHolder.getAdapterPosition());
             }
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {return false;}
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclewview);
@@ -91,5 +79,13 @@ public class CartAcitivty extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    ArrayList<ProductModel> getProducts(){
+        ArrayList<ProductModel> models = new ArrayList<>();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ProductModel> productModels = realm.where(ProductModel.class).sort("timestamp", Sort.DESCENDING).findAllAsync();
+        models.addAll(productModels);
+        return models;
+
     }
 }

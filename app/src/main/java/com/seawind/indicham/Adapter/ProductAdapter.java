@@ -58,14 +58,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             super(itemView);
             iv_prod = itemView.findViewById(R.id.iv_prod);
             txt_prod_title = itemView.findViewById(R.id.txt_prod_title);
-
-        /* itemView.setOnTouchListener(new OnSwipeListener(context){
-                @Override
-                public void onSwipeLeft() {
-                    Toast.makeText(context, "onSwipeLeft", Toast.LENGTH_SHORT).show();
-                    super.onSwipeLeft();
-                }
-            });*/
         }
     }
 
